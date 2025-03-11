@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Результат вычисления</title>
+</head>
+<body>
+<h1>Калькулятор</h1>
+
+<div th:if="${error}">
+    <p style="color: red;" th:text="${error}"></p>
+</div>
+
+<div th:unless="${error}">
+    <p>
+        Результат:
+        <span th:text="${a}"></span>
+        <span th:text="${operation}"></span>
+        <span th:text="${b}"></span>
+        =
+        <span th:text="${result}"></span>
+    </p>
+</div>
+
+<a href="/exit">Назад</a>
+</body>
+</html>
