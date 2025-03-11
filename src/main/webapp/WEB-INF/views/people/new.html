@@ -1,0 +1,19 @@
+<!-- src/main/webapp/WEB-INF/views/people/new.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить нового человека</title>
+</head>
+<body>
+<h2>Форма создания нового человека</h2>
+<form th:action="@{/people}" th:object="${person}" method="post">
+    <div>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+    </div>
+    <button type="submit">Создать</button>
+</form>
+<a href="/people">Назад к списку</a>
+</body>
+</html>

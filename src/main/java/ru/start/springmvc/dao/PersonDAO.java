@@ -24,4 +24,17 @@ public class PersonDAO {
     public Person show(int id) { // Возвращает человека по идентификатору
         return people.stream().filter(person -> person.getId() == id).findFirst().orElse(null);
     }
+    public void save(Person person) { // Сохраняет человека в БД
+        if (person.getId() == 0) {
+            person.setId(++PEOPLE_COUNT);
+            people.add(person);
+        } else {
+            for (Person p : people) {
+                if (p.getId() == person.getId()) {
+                    p.setName(person.getName());
+                    break;
+                }
+            }
+        }
+    }
 }

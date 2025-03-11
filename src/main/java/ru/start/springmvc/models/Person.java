@@ -4,6 +4,15 @@ public class Person {
     private int id;
     private String name;
 
+    public Person() {
+
+    }
+
+    public void Person (){
+        this.id = 0;
+        this.name = null;
+    }
+
     public Person(int id, String name) {
         this.id = id;
         this.name = name;
