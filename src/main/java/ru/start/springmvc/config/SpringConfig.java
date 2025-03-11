@@ -13,7 +13,7 @@ import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("ru.start.springmvc.controllers")
+@ComponentScan("ru.start.springmvc")
 public class SpringConfig implements WebMvcConfigurer {
 
     @Bean
@@ -45,4 +45,5 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
     }
+
 }
