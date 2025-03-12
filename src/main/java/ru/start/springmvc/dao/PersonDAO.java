@@ -12,10 +12,10 @@ public class PersonDAO {
     private static int PEOPLE_COUNT = 0;
 
     static {
-        people.add(new Person(++PEOPLE_COUNT,"John Doe"));
-        people.add(new Person(++PEOPLE_COUNT,"Jane Smith"));
-        people.add(new Person(++PEOPLE_COUNT,"Bob Johnson"));
-        people.add(new Person(++PEOPLE_COUNT,"Alice Brown"));
+        people.add(new Person(++PEOPLE_COUNT,"John Doe", 24, "john.doe@example.com"));
+        people.add(new Person(++PEOPLE_COUNT,"Jane Smith", 30, "jane.smith@example.com" ));
+        people.add(new Person(++PEOPLE_COUNT,"Bob Johnson", 40, "bob.johnson@example.com" ));
+        people.add(new Person(++PEOPLE_COUNT,"Alice Brown", 28, "alice.brown@example.com"  ));
     }
 
     public List<Person> index() {
@@ -36,5 +36,16 @@ public class PersonDAO {
                 }
             }
         }
+    }
+    public void update(int id, Person updatePerson) {
+        Person personToBeUpdated = show(id);
+        if (personToBeUpdated!= null) {
+            personToBeUpdated.setName(updatePerson.getName());
+            personToBeUpdated.setAge(updatePerson.getAge());
+            personToBeUpdated.setEmail(updatePerson.getEmail());
+        }
+    }
+    public void delete(int id) { // Удаляет человека из БД
+        people.removeIf(person -> person.getId() == id);
     }
 }
