@@ -5,8 +5,17 @@
 </head>
 <body>
 <h1>Данные человека</h1>
-<p>ID: <span th:text="${person.id}"></span></p>
-<p>Имя: <span th:text="${person.name}"></span></p>
+<p th:text="${person.getName() + ', ' + person.getAge()}">VALUE</p>
+<p th:text="${'Email: ' + person.getEmail()}">VALUE</p>
+<p th:text="${person.getId()}">VALUE</p>
+
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
 <a href="/people">Назад</a>
+
 </body>
 </html>

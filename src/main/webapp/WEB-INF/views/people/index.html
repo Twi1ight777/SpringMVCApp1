@@ -4,12 +4,16 @@
     <title>Список людей</title>
 </head>
 <body>
-<h1>Список людей</h1>
-<ul>
-    <li th:each="person : ${people}">
-        <a th:href="@{/people/{id}(id=${person.id})}"
-           th:text="${person.name}"></a>
-    </li>
-</ul>
+
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+       th:text="${person.getName() + ', ' + person.getAge() + ', ' + person.getEmail()}">user</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/people/new">Create new person</a>
+
 </body>
 </html>
