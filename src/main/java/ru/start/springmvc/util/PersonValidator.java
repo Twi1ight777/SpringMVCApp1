@@ -28,7 +28,7 @@ public class PersonValidator implements Validator {
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
         // Проверяем поля на соответствие условиям (Есть ли человек с таким же email, что и у людей в бд уже созданных)
-        if (personDAO.show(person.getEmail()).isPresent())
-            errors.rejectValue("email", "email.exists", "Email already exists");
+        if (personDAO.getPersonByFullName(person.getFullName()).isPresent())
+            errors.rejectValue("fullName", "fullName.exist", "Человек с таким ФИО уже существует");
     }
 }
