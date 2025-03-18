@@ -24,14 +24,15 @@ public class PersonDAO {
     public List<Person> index() {
         return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<>(Person.class));
     }
+
     //Optional
     public Person show(int id) {
         return jdbcTemplate.query("SELECT * FROM Person WHERE id=?", new Object[]{id},
-                        new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO Person(full_name,year_of_birth) VALUES(?, ?)", person.getFullName(),
+        jdbcTemplate.update("INSERT INTO Person(full_name, year_of_birth) VALUES(?, ?)", person.getFullName(),
                 person.getYearOfBirth());
     }
 
@@ -39,6 +40,7 @@ public class PersonDAO {
         jdbcTemplate.update("UPDATE Person SET full_name=?, year_of_birth=? WHERE id=?", updatedPerson.getFullName(),
                 updatedPerson.getYearOfBirth());
     }
+
     // Реализовали дополнительно каскадирование в бд ON DELETE SET NULL - принадлежащие человеку книги вернутся в список
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM Person WHERE id=?", id);
@@ -46,14 +48,15 @@ public class PersonDAO {
 
     public Optional<Person> getPersonByFullName(String fullName) {
         return jdbcTemplate.query("SELECT * FROM Person WHERE full_name=?", new Object[]{fullName},
-                        new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
-    }
-    // Join не нужен. С помощью отдельного метода show получили id человека. Возвращаем все книги из списка книг человека
-    public List<Book> getBooksByPersonId(int id) {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE person_id=?", new Object[]{id},
-                        new BeanPropertyRowMapper<>(Book.class));
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
+    // Join не нужен. С помощью отдельного метода show получили id человека. Возвращаем все книги из списка книг человека
+    public List<Book> getBooksByPersonId(int id) {
+        return jdbcTemplate.query("SELECT * FROM Book WHERE person_id=?", new Object[]{id},
+                new BeanPropertyRowMapper<>(Book.class));
+    }
+}
     //////////////////////////Тестируем производительность пакетной вставки/////////////////////////////////////////////
 //
 //    public void testMultipleUpdate(){
@@ -95,4 +98,3 @@ public class PersonDAO {
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("Time for 1000 records (batch): " + (endTime - startTime) + " ms");
 //    }
-}

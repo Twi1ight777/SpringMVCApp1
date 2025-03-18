@@ -37,7 +37,7 @@ public class BookController {
         model.addAttribute("book", bookDAO.show(id));
 
         Optional<Person> bookOwner = bookDAO.getBookOwner(id);
-
+        // Либо в модель помещен ключ owner, если у книги есть владелец. People список из всех людей нашей таблицы
         if (bookOwner.isPresent()) {
             model.addAttribute("owner", bookOwner.get());
         } else {
@@ -48,7 +48,7 @@ public class BookController {
     }
 
     @GetMapping("/new")
-    public String newBook(@ModelAttribute("person") Book book){
+    public String newBook(@ModelAttribute("book") Book book){
         return "books/new";
     }
     @PostMapping()
